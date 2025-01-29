@@ -1,0 +1,82 @@
+html {
+  box-sizing: border-box;
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  scroll-behavior: smooth !important;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+.body {
+  position: relative;
+  overflow-x: hidden;
+  color: var(--text-color);
+  background: var(--bg-color);
+
+  &--fixed {
+    overflow-y: hidden;
+  }
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+  object-fit: cover;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol {
+  margin: 0;
+}
+
+input {
+  outline: none;
+  border: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+}
+
+button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+label {
+  cursor: pointer;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+  max-width: calc(var(--container-width) + (var(--container-padding) * 2));
+}
+
+.time {
+  font-family: Montserrat, sans-serif;
+  font-weight: 300;
+  font-size: 13px;
+}
+
+

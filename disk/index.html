@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Чат</title>
+    <script type="module" crossorigin src="/assets/main-DxSKHeMh.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-DYnGWzPr.css">
+  </head>
+  <body class="body">
+    <div class="wrapper container">
+      <div class="top">
+        <button id="settings" class="top__btn heading-h5">Настройка</button>
+        <button class="top__btn heading-h5">Выйти</button>
+      </div>
+      <div class="body-messenger">
+        <div id="message-block"></div>
+      </div>
+      <form id="sending">
+        <input type="text" placeholder="Сообщение..." id="typingText" />
+        <button id="sendingBtn">
+          <img width="20" height="20" src=" assets/img/send-email-svgrepo-com.svg" alt="" />
+        </button>
+      </form>
+    </div>
+    <div class="modal modal__settings none" id="overlow-settings">
+      <div class="modal__window">
+        <div class="modal__top">
+          <p class="text-p-medium">Настройки</p>
+          <span class="modal__close"></span>
+        </div>
+        <p class="text-p-medium">Имя в чате</p>
+        <p id="query-result-name-change"></p>
+        <form id="modal__settings-form">
+          <input type="text" placeholder="Введите никнейм" id="modal__settings-text" />
+          <button id="modal__settings-btn">Ок</button>
+        </form>
+      </div>
+    </div>
+    <div class="modal modal-authorization" id="overlow-authorization">
+      <div class="modal__window">
+        <div class="modal-authorization__top">
+          <p class="modal-authorization__title text-p-medium">Авторизация</p>
+          <span class="modal-authorization__close"></span>
+        </div>
+        <form id="authorization" novalidate>
+          <p class="text-p-medium">Почта:</p>
+          <input type="email" placeholder="Введите вашу почту" id="modal-authorization__email" />
+          <p id="query-result-email"></p>
+          <div class="modal-authorization__bottom">
+            <button class="modal-authorization__btn" id="getCode">Получить код</button>
+            <button class="modal-authorization__btn"  id="enterCode" type="button">Ввести код</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="modal modal-confirmation none" id="overlow-confirmation">
+      <div class="modal__window">
+        <div class="modal-confirmation__top">
+          <p class="modal-confirmation__title text-p-medium">Подтверждение</p>
+          <span class="modal-confirmation__close"></span>
+        </div>
+        <form id="confirmation">
+          <p class="text-p-medium">Код:</p>
+          <input type="text" placeholder="Введите ваш код" id="modal-confirmation__text" />
+          <p id="query-result-confirmation"></p>
+          <div class="modal-confirmation__bottom">
+            <button class="modal-confirmation__btn" id="confirmation-btn">Войти</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    <template id="templateContent">
+      <div class="message__wrapper">
+        <p class="message text-p-default"></p>
+        <div class="time"></div>
+      </div>
+    </template>
+  </body>
+</html>

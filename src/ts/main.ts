@@ -10,6 +10,7 @@ import { useToken } from './services/confirmation/useToken.ts';
 import { ELEMENTS } from './message/elements.ts';
 import Cookies from 'js-cookie';
 
+const socket = new WebSocket(`wss://edu.strada.one/websockets?${Cookies.get('token')}`);
 const { ENTER_CODE, CLOSE_CONFIRMATION, FORM_EMAIL } = ELEMENTS_UI_AUTHORIZATION;
 const { FORM_CONFIRMATION } = ELEMENTS_UI_CONFIRMATION;
 const { SETTINGS, FORM_SETTINGS } = ELEMENTS_MODAL_SETTINGS;
@@ -24,19 +25,14 @@ CLOSE_CONFIRMATION?.addEventListener('click', switchModalAuthorization);
 FORM_CONFIRMATION?.addEventListener('submit', (e: Event) => {
   e.preventDefault();
   useToken();
+  socket.onopen 
 });
 
 sending.addEventListener('submit', (e: Event) => {
   e.preventDefault();
-  const socket = new WebSocket(`wss://edu.strada.one/websockets?${Cookies.get('token')}`);
-  socket.onopen = function () {
-    const i = ELEMENTS.INPUT_TEXT?.value;
-    socket.send(JSON.stringify({ text: i }));
-  };
-  socket.onmessage = function (event) {
-    console.log(event.data);
-    render()
-  };
+
+  const i = ELEMENTS.INPUT_TEXT?.value;
+  socket.send(JSON.stringify({ text: i }));
   // pushNewMessage();
   // render();
 });
@@ -47,5 +43,9 @@ FORM_SETTINGS?.addEventListener('submit', (e: Event) => {
   changingTheUserName();
 });
 
+socket.onmessage = function (event) {
+  console.log(event.data);
+  render()
+};
 
 

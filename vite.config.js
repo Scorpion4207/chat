@@ -7,7 +7,7 @@ export default defineConfig({
     open: true,
   },
   build: {
-    outDir: '../disk',
+    outDir: '../dist',
     emptyOutDir: true,
     rollupOptions: {
       input: {

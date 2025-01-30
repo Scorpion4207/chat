@@ -45,5 +45,8 @@ FORM_SETTINGS?.addEventListener('submit', (e: Event) => {
   changingTheUserName();
   const socket = new WebSocket(`wss://edu.strada.one/websockets?${Cookies.get('token')}`);
   socket.onopen
+  socket.onmessage = function () {
+    renderOfNewMessage()
+  };
 });
 

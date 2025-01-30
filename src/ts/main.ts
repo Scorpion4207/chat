@@ -1,6 +1,6 @@
 import '/scss/main.scss';
 import { openModal, cloceModal, changingTheUserName } from './services/settingsName/settingsName.ts';
-import { render, renderOfNewMessage } from './message/sentMessage.ts';
+import { renderOfNewMessage } from './message/sentMessage.ts';
 import { receiveTokenByEmail } from './services/authorization/requestEmail.ts';
 import { ELEMENTS_UI_AUTHORIZATION } from './services/authorization/elements.ts';
 import { ELEMENTS_UI_CONFIRMATION } from './services/confirmation/elements.ts';

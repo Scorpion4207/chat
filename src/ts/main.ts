@@ -45,7 +45,9 @@ FORM_SETTINGS?.addEventListener('submit', (e: Event) => {
     socket.onopen;
   }, 1000);
   socket.onmessage = function (eleme) {
-    createMessage(eleme.data['user']['name'], eleme.data['user']['email'], eleme.data['text'], eleme.data['createdAt']);
+    const socketData = JSON.parse(eleme.data);
+    
+    createMessage(socketData['user']['name'], socketData['user']['email'], socketData['text'], socketData['createdAt']);
     scrollContainerToBottom();
   };
 });

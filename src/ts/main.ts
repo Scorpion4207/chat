@@ -1,6 +1,6 @@
 import '/scss/main.scss';
 import { openModal, cloceModal, changingTheUserName } from './services/settingsName/settingsName.ts';
-import { renderOfNewMessage } from './message/sentMessage.ts';
+import { render } from './message/sentMessage.ts';
 import { receiveTokenByEmail } from './services/authorization/requestEmail.ts';
 import { ELEMENTS_UI_AUTHORIZATION } from './services/authorization/elements.ts';
 import { ELEMENTS_UI_CONFIRMATION } from './services/confirmation/elements.ts';
@@ -34,9 +34,7 @@ sending.addEventListener('submit', (e: Event) => {
     socket.send(JSON.stringify({ text: i }));
 
   };
-  socket.onmessage = function () {
-    renderOfNewMessage()
-  };
+
 });
 
 FORM_EMAIL?.addEventListener('submit', receiveTokenByEmail);
@@ -44,9 +42,12 @@ FORM_SETTINGS?.addEventListener('submit', (e: Event) => {
   e.preventDefault();
   changingTheUserName();
   const socket = new WebSocket(`wss://edu.strada.one/websockets?${Cookies.get('token')}`);
-  socket.onopen
+  
+  setInterval(() => {
+    socket.onopen
+  }, 1000);
   socket.onmessage = function () {
-    renderOfNewMessage()
+    render()
   };
 });
 

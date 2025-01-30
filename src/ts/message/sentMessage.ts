@@ -7,7 +7,7 @@ const { SERVER_URL, GET_DATA_MESSAGES } = API;
 import Cookies from 'js-cookie';
 import { format } from 'date-fns';
 
-function scrollContainerToBottom(){
+export function scrollContainerToBottom(){
   if (MESSAGE_BLOG) {
     console.log((MESSAGE_BLOG.scrollTop = MESSAGE_BLOG.scrollHeight));
   }

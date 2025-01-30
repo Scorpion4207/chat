@@ -1,6 +1,6 @@
 import '/scss/main.scss';
 import { openModal, cloceModal, changingTheUserName } from './services/settingsName/settingsName.ts';
-import { render } from './message/sentMessage.ts';
+import { createMessage, scrollContainerToBottom } from './message/sentMessage.ts';
 import { receiveTokenByEmail } from './services/authorization/requestEmail.ts';
 import { ELEMENTS_UI_AUTHORIZATION } from './services/authorization/elements.ts';
 import { ELEMENTS_UI_CONFIRMATION } from './services/confirmation/elements.ts';
@@ -30,11 +30,9 @@ sending.addEventListener('submit', (e: Event) => {
   e.preventDefault();
   const i = ELEMENTS.INPUT_TEXT?.value;
   const socket = new WebSocket(`wss://edu.strada.one/websockets?${Cookies.get('token')}`);
-  socket.onopen = function(){
+  socket.onopen = function () {
     socket.send(JSON.stringify({ text: i }));
-
   };
-
 });
 
 FORM_EMAIL?.addEventListener('submit', receiveTokenByEmail);
@@ -42,12 +40,12 @@ FORM_SETTINGS?.addEventListener('submit', (e: Event) => {
   e.preventDefault();
   changingTheUserName();
   const socket = new WebSocket(`wss://edu.strada.one/websockets?${Cookies.get('token')}`);
-  
+
   setInterval(() => {
-    socket.onopen
+    socket.onopen;
   }, 1000);
-  socket.onmessage = function () {
-    render()
+  socket.onmessage = function (eleme) {
+    createMessage(eleme.data['user']['name'], eleme.data['user']['email'], eleme.data['text'], eleme.data['createdAt']);
+    scrollContainerToBottom();
   };
 });
-

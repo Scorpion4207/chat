@@ -5,7 +5,6 @@ import { sendingData } from './requestName.ts';
 import { render } from '../../message/sentMessage.ts';
 import { checkForEmptyString } from '../../errors/errors.ts';
 
-
 const { MODAL_SETTINGS, RESULT_NAME_CHANGE, INPUT_NIKENAME } = ELEMENTS_MODAL_SETTINGS;
 const { SERVER_URL, GET_DATA_USER } = API;
 
@@ -43,9 +42,13 @@ export async function changingTheUserName(): Promise<void> {
     if (RESULT_NAME_CHANGE) {
       RESULT_NAME_CHANGE.textContent = '';
     }
-    sendingData();
+    await sendingData();
+    await sendingData();
     checkForEmptyString(INPUT_NIKENAME);
-    getDataUser(`${SERVER_URL}${GET_DATA_USER}`, 'name')
+
+    console.log(await getDataUser(`${SERVER_URL}${GET_DATA_USER}`, 'name'));
+    console.log(await getDataUser(`${SERVER_URL}${GET_DATA_USER}`, 'name'));
+
     await render();
     MODAL_SETTINGS?.classList.add('none');
   } catch (err) {

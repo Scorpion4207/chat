@@ -7,6 +7,17 @@ const { SERVER_URL, GET_DATA_MESSAGES } = API;
 import Cookies from 'js-cookie';
 import { format } from 'date-fns';
 
+function scrollContainerToBottom(){
+  if (MESSAGE_BLOG) {
+    console.log((MESSAGE_BLOG.scrollTop = MESSAGE_BLOG.scrollHeight));
+  }
+}
+
+export async function renderOfNewMessage(){
+  const messagesData = await getDataMessages(`${SERVER_URL}${GET_DATA_MESSAGES}`);
+  messagesData.slice(0, 1).map((date) => createMessage(date['user']['name'], date['user']['email'], date['text'], date['createdAt']));
+  scrollContainerToBottom()
+}
 // export function pushNewMessage() {
 //   try {
 //     checkForEmptyString(INPUT_TEXT);
@@ -48,4 +59,6 @@ export async function render() {
   messagesData
     .sort((a, b) => new Date(a['createdAt']).getTime() - new Date(b['createdAt']).getTime())
     .map((date) => createMessage(date['user']['name'], date['user']['email'], date['text'], date['createdAt']));
+    scrollContainerToBottom()
+  
 }

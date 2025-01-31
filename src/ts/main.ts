@@ -6,8 +6,7 @@ import { ELEMENTS_UI_CONFIRMATION } from './services/confirmation/elements.ts';
 import { ELEMENTS_MODAL_SETTINGS } from './services/settingsName/elements.ts';
 import { switchModalAuthorization } from './services/authorization/switchingBetweenPopups.ts';
 import { useToken } from './services/confirmation/useToken.ts';
-import { connect, sendingMessageToServer } from "./webSocket.ts"; 
-
+import { connect, sendingMessageToServer } from './webSocket.ts';
 
 const { ENTER_CODE, CLOSE_CONFIRMATION, FORM_EMAIL } = ELEMENTS_UI_AUTHORIZATION;
 const { FORM_CONFIRMATION } = ELEMENTS_UI_CONFIRMATION;
@@ -23,17 +22,16 @@ CLOSE_CONFIRMATION?.addEventListener('click', switchModalAuthorization);
 FORM_CONFIRMATION?.addEventListener('submit', (e: Event) => {
   e.preventDefault();
   useToken();
-  connect()
+  connect();
 });
 
 sending.addEventListener('submit', (e: Event) => {
   e.preventDefault();
-  sendingMessageToServer()
+  sendingMessageToServer();
 });
 
 FORM_EMAIL?.addEventListener('submit', receiveTokenByEmail);
 FORM_SETTINGS?.addEventListener('submit', (e: Event) => {
   e.preventDefault();
   changingTheUserName();
-  
 });

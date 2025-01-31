@@ -6,7 +6,7 @@ import { ELEMENTS_UI_CONFIRMATION } from './services/confirmation/elements.ts';
 import { ELEMENTS_MODAL_SETTINGS } from './services/settingsName/elements.ts';
 import { switchModalAuthorization } from './services/authorization/switchingBetweenPopups.ts';
 import { useToken } from './services/confirmation/useToken.ts';
-import { connect, sendingMessageToServer } from './webSocket.ts';
+import { connect, sendingMessageToServer } from './socket.ts';
 
 const { ENTER_CODE, CLOSE_CONFIRMATION, FORM_EMAIL } = ELEMENTS_UI_AUTHORIZATION;
 const { FORM_CONFIRMATION } = ELEMENTS_UI_CONFIRMATION;

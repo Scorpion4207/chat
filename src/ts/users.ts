@@ -33,6 +33,4 @@ export const USERS: UserType[] = [
   },
 ];
 
-export let myName: string = ''
-
-
+export let myName: string = '';

@@ -7,8 +7,9 @@ import { ELEMENTS_MODAL_SETTINGS } from './services/settingsName/elements.ts';
 import { switchModalAuthorization } from './services/authorization/switchingBetweenPopups.ts';
 import { useToken } from './services/confirmation/useToken.ts';
 import { connect, sendingMessageToServer } from './socket.ts';
+import { ELEMENTS } from "./message/elements.ts";
 
-const { ENTER_CODE, CLOSE_CONFIRMATION, FORM_EMAIL } = ELEMENTS_UI_AUTHORIZATION;
+const { ENTER_CODE, CLOSE_CONFIRMATION, FORM_EMAIL, OVERLOW_AUTHORIZATION } = ELEMENTS_UI_AUTHORIZATION;
 const { FORM_CONFIRMATION } = ELEMENTS_UI_CONFIRMATION;
 const { SETTINGS, FORM_SETTINGS } = ELEMENTS_MODAL_SETTINGS;
 const sending = document.getElementById('sending') as HTMLElement;
@@ -18,6 +19,11 @@ document.addEventListener('click', cloceModal);
 
 ENTER_CODE?.addEventListener('click', switchModalAuthorization);
 CLOSE_CONFIRMATION?.addEventListener('click', switchModalAuthorization);
+
+ELEMENTS.EXIT_CHAT?.addEventListener('click', (e) => {
+  e.preventDefault()
+  OVERLOW_AUTHORIZATION?.classList.remove('none')
+})
 
 FORM_CONFIRMATION?.addEventListener('submit', (e: Event) => {
   e.preventDefault();

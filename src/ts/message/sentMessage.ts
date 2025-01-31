@@ -59,6 +59,7 @@ export async function render() {
   messagesData
     .sort((a, b) => new Date(a['createdAt']).getTime() - new Date(b['createdAt']).getTime())
     .map((date) => createMessage(date['user']['name'], date['user']['email'], date['text'], date['createdAt']));
+    
     scrollContainerToBottom()
-  
+
 }

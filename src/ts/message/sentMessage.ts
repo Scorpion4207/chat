@@ -22,7 +22,7 @@ export async function renderingMessagesHistory() {
     let blockHeight = ELEMENTS.MESSAGE_BLOG.scrollHeight;
     const messagesData = await getDataMessages(`${SERVER_URL}${GET_DATA_MESSAGES}`);
     messagesData
-      .slice(0 + counterOfRenderedMessages, 20 + counterOfRenderedMessages)
+      .slice(-20 + counterOfRenderedMessages, 0 + counterOfRenderedMessages)
       .map((date) =>
         createMessage(date['user']['name'], date['user']['email'], date['text'], date['createdAt'], 'prepend'),
       );
@@ -62,15 +62,3 @@ export function createMessage(
   }
 }
 
-export async function render() {
-  if (MESSAGE_BLOG) {
-    MESSAGE_BLOG.innerHTML = '';
-  }
-  const messagesData = await getDataMessages(`${SERVER_URL}${GET_DATA_MESSAGES}`);
-  messagesData
-    .slice(0, 20)
-    .map((date) =>
-      createMessage(date['user']['name'], date['user']['email'], date['text'], date['createdAt'], 'prepend'),
-    );
-  scrollContainerToBottom();
-}

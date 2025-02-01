@@ -2,7 +2,7 @@ import { ELEMENTS_MODAL_SETTINGS } from './elements.ts';
 import { API } from '../api.ts';
 import { getDataUser } from '../getDataUser.ts';
 import { sendingData } from './requestName.ts';
-import { render } from '../../message/sentMessage.ts';
+import { renderingMessagesHistory } from '../../message/sentMessage.ts';
 import { checkForEmptyString } from '../../errors/errors.ts';
 
 const { MODAL_SETTINGS, RESULT_NAME_CHANGE, INPUT_NIKENAME } = ELEMENTS_MODAL_SETTINGS;
@@ -49,7 +49,7 @@ export async function changingTheUserName(): Promise<void> {
     console.log(await getDataUser(`${SERVER_URL}${GET_DATA_USER}`, 'name'));
     console.log(await getDataUser(`${SERVER_URL}${GET_DATA_USER}`, 'name'));
 
-    await render();
+    await renderingMessagesHistory();
     MODAL_SETTINGS?.classList.add('none');
   } catch (err) {
     if (RESULT_NAME_CHANGE) {

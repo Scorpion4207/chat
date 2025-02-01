@@ -13,12 +13,12 @@ export function scrollContainerToBottom() {
     MESSAGE_BLOG.scrollTop = MESSAGE_BLOG.scrollHeight;
   }
 }
-const messagesData = await getDataMessages(`${SERVER_URL}${GET_DATA_MESSAGES}`);
 
-export function renderingMessagesHistory() {
+export async function renderingMessagesHistory() {
   if(counterOfRenderedMessages > 300){
-    alert('Вся история загружена')
+    return alert('Вся история загружена')
   }
+  const messagesData = await getDataMessages(`${SERVER_URL}${GET_DATA_MESSAGES}`);
   messagesData
     .slice(0 + counterOfRenderedMessages, 20 + counterOfRenderedMessages)
     .map((date) =>
@@ -60,6 +60,7 @@ export async function render() {
   if (MESSAGE_BLOG) {
     MESSAGE_BLOG.innerHTML = '';
   }
+  const messagesData = await getDataMessages(`${SERVER_URL}${GET_DATA_MESSAGES}`);
   messagesData
     .slice(0, 20)
     .map((date) =>

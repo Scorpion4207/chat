@@ -13,7 +13,7 @@ import { renderingMessagesHistory } from "./message/sentMessage.ts";
 ELEMENTS.MESSAGE_BLOG?.addEventListener('scroll', () => {
   renderingMessagesHistory()
 })
-
+connect()
 const { ENTER_CODE, CLOSE_CONFIRMATION, FORM_EMAIL, OVERLOW_AUTHORIZATION } = ELEMENTS_UI_AUTHORIZATION;
 const { FORM_CONFIRMATION } = ELEMENTS_UI_CONFIRMATION;
 const { SETTINGS, FORM_SETTINGS } = ELEMENTS_MODAL_SETTINGS;
@@ -33,7 +33,6 @@ ELEMENTS.EXIT_CHAT?.addEventListener('click', (e) => {
 FORM_CONFIRMATION?.addEventListener('submit', (e: Event) => {
   e.preventDefault();
   useToken();
-  connect();
 });
 
 sending.addEventListener('submit', (e: Event) => {

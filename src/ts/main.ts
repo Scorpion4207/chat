@@ -11,12 +11,7 @@ import { ELEMENTS } from "./message/elements.ts";
 import { renderingMessagesHistory } from "./message/sentMessage.ts";
 
 ELEMENTS.MESSAGE_BLOG?.addEventListener('scroll', () => {
-  if(ELEMENTS.MESSAGE_BLOG?.scrollTop === 0){
-    let blockHeight = ELEMENTS.MESSAGE_BLOG.scrollHeight
-    renderingMessagesHistory()
-    ELEMENTS.MESSAGE_BLOG.scrollTop = ELEMENTS.MESSAGE_BLOG.scrollHeight - (blockHeight + 0)
-    blockHeight = ELEMENTS.MESSAGE_BLOG.scrollHeight  
-  }
+  renderingMessagesHistory()
 })
 
 const { ENTER_CODE, CLOSE_CONFIRMATION, FORM_EMAIL, OVERLOW_AUTHORIZATION } = ELEMENTS_UI_AUTHORIZATION;

@@ -15,16 +15,22 @@ export function scrollContainerToBottom() {
 }
 
 export async function renderingMessagesHistory() {
-  if(counterOfRenderedMessages > 300){
-    return alert('Вся история загружена')
-  }
-  const messagesData = await getDataMessages(`${SERVER_URL}${GET_DATA_MESSAGES}`);
-  messagesData
-    .slice(0 + counterOfRenderedMessages, 20 + counterOfRenderedMessages)
-    .map((date) =>
-      createMessage(date['user']['name'], date['user']['email'], date['text'], date['createdAt'], 'prepend'),
-    );
+  if (ELEMENTS.MESSAGE_BLOG?.scrollTop === 0) {
+    if (counterOfRenderedMessages > 300) {
+      return alert('Вся история загружена');
+    }
+    let blockHeight = ELEMENTS.MESSAGE_BLOG.scrollHeight;
+    const messagesData = await getDataMessages(`${SERVER_URL}${GET_DATA_MESSAGES}`);
+    messagesData
+      .slice(0 + counterOfRenderedMessages, 20 + counterOfRenderedMessages)
+      .map((date) =>
+        createMessage(date['user']['name'], date['user']['email'], date['text'], date['createdAt'], 'prepend'),
+      );
     counterOfRenderedMessages = counterOfRenderedMessages + 20;
+    ELEMENTS.MESSAGE_BLOG.scrollTop = ELEMENTS.MESSAGE_BLOG.scrollHeight - blockHeight;
+    console.log(blockHeight);
+    blockHeight = ELEMENTS.MESSAGE_BLOG.scrollHeight;
+  }
 }
 
 export function createMessage(

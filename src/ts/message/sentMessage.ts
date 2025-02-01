@@ -1,42 +1,41 @@
 import { ELEMENTS } from './elements.ts';
 import { getDataMessages } from '../services/getDataMessengers.ts';
 import { API } from '../services/api.ts';
-// import { checkForEmptyString } from '../errors/errors.ts';
 const { TEMPLATE_CONTENT, MESSAGE_BLOG } = ELEMENTS;
 const { SERVER_URL, GET_DATA_MESSAGES } = API;
 import Cookies from 'js-cookie';
 import { format } from 'date-fns';
 
-export function scrollContainerToBottom(){
+let counterOfRenderedMessages = 20;
+
+export function scrollContainerToBottom() {
   if (MESSAGE_BLOG) {
-    console.log((MESSAGE_BLOG.scrollTop = MESSAGE_BLOG.scrollHeight));
+    MESSAGE_BLOG.scrollTop = MESSAGE_BLOG.scrollHeight;
   }
 }
+const messagesData = await getDataMessages(`${SERVER_URL}${GET_DATA_MESSAGES}`);
 
-export async function renderOfNewMessage(){
-  const messagesData = await getDataMessages(`${SERVER_URL}${GET_DATA_MESSAGES}`);
-  messagesData.slice(0, 1).map((date) => createMessage(date['user']['name'], date['user']['email'], date['text'], date['createdAt']));
-  scrollContainerToBottom()
+export function renderingMessagesHistory() {
+  if(counterOfRenderedMessages > 300){
+    alert('Вся история загружена')
+  }
+  messagesData
+    .slice(0 + counterOfRenderedMessages, 20 + counterOfRenderedMessages)
+    .map((date) =>
+      createMessage(date['user']['name'], date['user']['email'], date['text'], date['createdAt'], 'prepend'),
+    );
+    counterOfRenderedMessages = counterOfRenderedMessages + 20;
 }
-// export function pushNewMessage() {
-//   try {
-//     checkForEmptyString(INPUT_TEXT);
-//     if (INPUT_TEXT) {
-//       USERS.push({
-//         textMessage: INPUT_TEXT.value,
-//         userName: myName,
-//         departureTime: `${new Date().getHours().toString().padStart(2, '0')}
-//       : ${new Date().getMinutes().toString().padStart(2, '0')}`,
-//       });
-//       INPUT_TEXT.value = '';
-//     }
-//   } catch (err) {
-//     return alert(err);
-//   }
-// }
 
-export function createMessage(username: string, email: string, textMessage: string, time: string) {
+export function createMessage(
+  username: string,
+  email: string,
+  textMessage: string,
+  time: string,
+  nameInsertion: string,
+) {
   if (TEMPLATE_CONTENT && MESSAGE_BLOG) {
+    const nameInsertionMethod = nameInsertion;
     const templateRoot = document.createElement('div');
     email === Cookies.get('email')
       ? templateRoot.classList.add('sent-message')
@@ -46,8 +45,14 @@ export function createMessage(username: string, email: string, textMessage: stri
     createMessage.textContent = `${username}: ${textMessage}`;
     const createTime = templateContent.querySelector('.time') as HTMLDivElement;
     createTime.textContent = format(new Date(time), 'HH:mm');
-    templateRoot.append(templateContent);
-    MESSAGE_BLOG.append(templateRoot);
+    if (nameInsertionMethod === 'prepend') {
+      templateRoot.prepend(templateContent);
+      MESSAGE_BLOG.prepend(templateRoot);
+    }
+    if (nameInsertionMethod === 'append') {
+      templateRoot.append(templateContent);
+      MESSAGE_BLOG.append(templateRoot);
+    }
   }
 }
 
@@ -55,11 +60,10 @@ export async function render() {
   if (MESSAGE_BLOG) {
     MESSAGE_BLOG.innerHTML = '';
   }
-  const messagesData = await getDataMessages(`${SERVER_URL}${GET_DATA_MESSAGES}`);
   messagesData
-    .sort((a, b) => new Date(a['createdAt']).getTime() - new Date(b['createdAt']).getTime())
-    .map((date) => createMessage(date['user']['name'], date['user']['email'], date['text'], date['createdAt']));
-    
-    scrollContainerToBottom()
-
+    .slice(0, 20)
+    .map((date) =>
+      createMessage(date['user']['name'], date['user']['email'], date['text'], date['createdAt'], 'prepend'),
+    );
+  scrollContainerToBottom();
 }

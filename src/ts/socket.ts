@@ -10,7 +10,7 @@ export function connect() {
   socket.onopen;
   socket.onmessage = (eleme) => {
     const socketData = JSON.parse(eleme.data);
-    createMessage(socketData['user']['name'], socketData['user']['email'], socketData['text'], socketData['createdAt']);
+    createMessage(socketData['user']['name'], socketData['user']['email'], socketData['text'], socketData['createdAt'], 'append');
     scrollContainerToBottom();
   };
   socket.onclose = () => {

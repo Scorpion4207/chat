@@ -1,4 +1,4 @@
-import { APIFetch } from "../types.ts";
+import { APIFetch } from '../types.ts';
 
 export const API: APIFetch = {
   SERVER_URL: 'https://edu.strada.one',

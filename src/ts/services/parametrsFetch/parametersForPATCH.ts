@@ -4,8 +4,8 @@ import { ELEMENTS_MODAL_SETTINGS } from '../settingsName/elements.ts';
 
 const { INPUT_NIKENAME } = ELEMENTS_MODAL_SETTINGS;
 
-export function parametrs() {
-  const INPUT = INPUT_NIKENAME?.value
+export function parametersForPATCH() {
+  const inputName = INPUT_NIKENAME?.value;
   const parametrsObj: ParametersFetch = {
     method: 'PATCH',
     headers: {
@@ -13,7 +13,7 @@ export function parametrs() {
       Authorization: `Bearer ${Cookies.get('token')}`,
     },
     body: JSON.stringify({
-      name: INPUT,
+      name: inputName,
     }),
   };
   return parametrsObj;

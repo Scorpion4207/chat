@@ -3,4 +3,5 @@ export const ELEMENTS = {
   MESSAGE_BLOG: document.getElementById('message-block') as HTMLDivElement | null,
   INPUT_TEXT: document.getElementById('typingText') as HTMLInputElement | null,
   EXIT_CHAT: document.getElementById('exit-chat') as HTMLButtonElement | null,
+  FORM_MESSAGE: document.getElementById('sending') as HTMLFormElement | null,
 };

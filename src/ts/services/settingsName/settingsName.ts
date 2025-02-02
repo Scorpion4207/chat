@@ -1,12 +1,7 @@
 import { ELEMENTS_MODAL_SETTINGS } from './elements.ts';
-import { API } from '../api.ts';
-import { getDataUser } from '../getDataUser.ts';
 import { sendingData } from './requestName.ts';
-import { renderingMessagesHistory } from '../../message/sentMessage.ts';
-import { checkForEmptyString } from '../../errors/errors.ts';
 
 const { MODAL_SETTINGS, RESULT_NAME_CHANGE, INPUT_NIKENAME } = ELEMENTS_MODAL_SETTINGS;
-const { SERVER_URL, GET_DATA_USER } = API;
 
 export function openModal() {
   if (MODAL_SETTINGS?.classList.contains('none')) {
@@ -24,9 +19,9 @@ export function cloceModal(e?: Event) {
       (!MODAL_SETTINGS?.classList.contains('none') && target.classList.contains('modal__settings')) ||
       target.classList.contains('modal__close')
     ) {
-      // if (myName === '') {
-      //   throw new Error('Введите никнейм');
-      // }
+      if (INPUT_NIKENAME?.value === '') {
+        throw new Error('Введите никнейм');
+      }
       MODAL_SETTINGS?.classList.add('none');
     }
   } catch (err) {
@@ -37,19 +32,12 @@ export function cloceModal(e?: Event) {
   }
 }
 
-export async function changingTheUserName(): Promise<void> {
+export async function changingTheUserName() {
   try {
     if (RESULT_NAME_CHANGE) {
       RESULT_NAME_CHANGE.textContent = '';
     }
     await sendingData();
-    await sendingData();
-    checkForEmptyString(INPUT_NIKENAME);
-
-    console.log(await getDataUser(`${SERVER_URL}${GET_DATA_USER}`, 'name'));
-    console.log(await getDataUser(`${SERVER_URL}${GET_DATA_USER}`, 'name'));
-
-    await renderingMessagesHistory();
     MODAL_SETTINGS?.classList.add('none');
   } catch (err) {
     if (RESULT_NAME_CHANGE) {

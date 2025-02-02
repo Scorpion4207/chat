@@ -1,10 +1,11 @@
 import { ELEMENTS } from './elements.ts';
 import { getDataMessages } from '../services/getDataMessengers.ts';
 import { API } from '../services/api.ts';
-const { TEMPLATE_CONTENT, MESSAGE_BLOG } = ELEMENTS;
-const { SERVER_URL, GET_DATA_MESSAGES } = API;
 import Cookies from 'js-cookie';
 import { format } from 'date-fns';
+
+const { TEMPLATE_CONTENT, MESSAGE_BLOG } = ELEMENTS;
+const { SERVER_URL, GET_DATA_MESSAGES } = API;
 
 let counterOfRenderedMessages = 20;
 
@@ -28,7 +29,6 @@ export async function renderingMessagesHistory() {
       );
     counterOfRenderedMessages = counterOfRenderedMessages + 20;
     ELEMENTS.MESSAGE_BLOG.scrollTop = ELEMENTS.MESSAGE_BLOG.scrollHeight - blockHeight;
-    console.log(blockHeight);
     blockHeight = ELEMENTS.MESSAGE_BLOG.scrollHeight;
   }
 }
@@ -61,4 +61,3 @@ export function createMessage(
     }
   }
 }
-

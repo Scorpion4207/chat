@@ -1,5 +1,5 @@
 import { API } from '../api.ts';
-import { parametrs } from '../parametrsFetch/parametersForPOST.ts';
+import { parametersForPOST } from '../parametrsFetch/parametersForPOST.ts';
 import { emailValidity } from '../../errors/errors.ts';
 import { ELEMENTS_UI_AUTHORIZATION } from './elements.ts';
 import { showSuccessfulRequestInDOM } from './utilits.ts';
@@ -7,8 +7,8 @@ import Cookies from 'js-cookie';
 
 const { EMAIL_VALIDATION, INPUT_EMAIL } = ELEMENTS_UI_AUTHORIZATION;
 
-async function sendingData(url: string): Promise<string> {
-  const response = await fetch(url, parametrs());
+async function sendingData(url: string) {
+  const response = await fetch(url, parametersForPOST());
   if (!response.ok) {
     throw new Error('Неудалось отправить код на почту !');
   }
@@ -16,12 +16,12 @@ async function sendingData(url: string): Promise<string> {
   return await response.json();
 }
 
-export async function receiveTokenByEmail(e: Event): Promise<void> {
+export async function receiveTokenByEmail(e: Event) {
   try {
     e.preventDefault();
-    const EMAIL = INPUT_EMAIL?.value
-    if(EMAIL){
-      Cookies.set('email', EMAIL)
+    const inputEmail = INPUT_EMAIL?.value;
+    if (inputEmail) {
+      Cookies.set('email', inputEmail);
     }
     const { SERVER_URL, POST_AND_PATCH_FETCH } = API;
     if (EMAIL_VALIDATION) {

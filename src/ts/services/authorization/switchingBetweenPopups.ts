@@ -6,4 +6,3 @@ export function switchModalAuthorization() {
   OVERLOW_AUTHORIZATION?.classList.toggle('none');
   OVERLOW_CONFIRMATION?.classList.toggle('none');
 }
-

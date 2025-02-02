@@ -5,5 +5,5 @@ export const ELEMENTS_UI_AUTHORIZATION = {
   ENTER_CODE: document.getElementById('enterCode') as HTMLButtonElement | null,
   OVERLOW_AUTHORIZATION: document.getElementById('overlow-authorization') as HTMLDivElement | null,
   OVERLOW_CONFIRMATION: document.getElementById('overlow-confirmation') as HTMLDivElement | null,
-  CLOSE_CONFIRMATION: document.querySelector('.modal-confirmation__close') as HTMLSpanElement | null
+  CLOSE_CONFIRMATION: document.querySelector('.modal-confirmation__close') as HTMLSpanElement | null,
 };

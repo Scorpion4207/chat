@@ -9,11 +9,16 @@ import { switchModalAuthorization } from './services/authorization/switchingBetw
 import { useToken } from './services/confirmation/useToken.ts';
 import { sendingMessageToServer } from './socket.ts';
 import { renderingMessagesHistory } from './message/sentMessage.ts';
+import { emoji } from "./emoji/emoji.ts";
+import { ELEMENTS_EMOJI } from "./emoji/elements.ts";
 
 const { ENTER_CODE, CLOSE_CONFIRMATION, FORM_EMAIL, OVERLOW_AUTHORIZATION } = ELEMENTS_UI_AUTHORIZATION;
 const { FORM_CONFIRMATION } = ELEMENTS_UI_CONFIRMATION;
 const { SETTINGS, FORM_SETTINGS } = ELEMENTS_MODAL_SETTINGS;
 const { FORM_MESSAGE, EXIT_CHAT, MESSAGE_BLOG, INPUT_TEXT } = ELEMENTS;
+const {EMOJI_LIST} = ELEMENTS_EMOJI
+
+emoji()
 
 MESSAGE_BLOG?.addEventListener('scroll', () => {
   renderingMessagesHistory();
@@ -26,7 +31,7 @@ ENTER_CODE?.addEventListener('click', switchModalAuthorization);
 
 CLOSE_CONFIRMATION?.addEventListener('click', switchModalAuthorization);
 
-EXIT_CHAT?.addEventListener('click', (e) => {
+EXIT_CHAT?.addEventListener('click', (e: Event) => {
   e.preventDefault();
   OVERLOW_AUTHORIZATION?.classList.remove('none');
 });
@@ -40,6 +45,7 @@ FORM_MESSAGE?.addEventListener('submit', (e: Event) => {
   e.preventDefault();
   sendingMessageToServer();
   if (INPUT_TEXT) INPUT_TEXT.value = '';
+  EMOJI_LIST?.classList.remove('active')
 });
 
 FORM_EMAIL?.addEventListener('submit', receiveTokenByEmail);

@@ -80,6 +80,7 @@
   background-color: #ec6608;
 }
 #sending {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -93,6 +94,7 @@
   border-radius: 30px;
 }
 
+#emojiSelectorIcon,
 #sendingBtn {
   background-color: var(--btn-bg);
   @include flex-all-center;
@@ -171,6 +173,34 @@
   }
 }
 
+#emojiList{
+  position: absolute;
+  bottom: 45px;
+  right: 45px;
+  background-color: var(--btn-bg);
+  flex-wrap: wrap;
+  max-height: 300px;
+  max-width: 300px;
+  overflow: hidden;
+  overflow-y: scroll;
+  border-radius: 20px;
+  padding: 15px 0px 15px 15px;
+  display: none;
+  @include mobile {
+    right: 0;
+    min-width: 100%;
+  }
+}
+
+.active#emojiList{
+  display: flex;
+}
+
+#emojiList li {
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px;
+}
 
 @import './components/modals/authorization.scss';
 @import './components/modals/confirmation.scss';

@@ -4,6 +4,7 @@ import { ELEMENTS_MODAL_SETTINGS } from '../settingsName/elements.ts';
 import { getDataUser } from '../getDataUser.ts';
 import { API } from '../api.ts';
 import { renderingMessagesHistory } from "../../message/sentMessage.ts";
+
 const { INPUT_CONFIRMATION, OVERLOW_CONFIRMATION, CONFIRMATION_VALIDATION } = ELEMENTS_UI_CONFIRMATION;
 const { MODAL_SETTINGS } = ELEMENTS_MODAL_SETTINGS;
 

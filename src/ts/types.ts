@@ -29,4 +29,5 @@ export interface APIFetch {
   POST_AND_PATCH_FETCH: string;
   GET_DATA_USER: string;
   GET_DATA_MESSAGES: string;
+  SERVER_EMOJI: string;
 }
